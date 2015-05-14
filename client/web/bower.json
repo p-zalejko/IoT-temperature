@@ -1,0 +1,10 @@
+{
+  "name": "pzalejko.iot.client.web",
+  "dependencies": {
+    "bootstrap-css-only": "~3.2.0",
+    "sockjs": "latest",
+    "stomp-websocket": "latest",
+    "Chart.js": "latest",
+    "jquery": "latest"
+  }
+}

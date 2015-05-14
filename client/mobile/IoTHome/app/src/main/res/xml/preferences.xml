@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference android:title="@string/settings_hostTitle"
+                        android:defaultValue="tcp://iot.eclipse.org:1883"
+                        android:key="mqttHost"
+                        android:summary="@string/settings_host_summary"/>
+    <EditTextPreference android:title="@string/settings_client_title"
+                        android:defaultValue="\@pzalejko_android"
+                        android:key="mqttClientID"
+                        android:summary="@string/settings_client_summary"/>
+    <EditTextPreference android:title="@string/settings_temperature_title"
+                        android:defaultValue="\@pzalejko/pi/out/#"
+                        android:key="mqttBasicTopic"
+                        android:summary="@string/settings_temperature_summary"/>
+
+</PreferenceScreen>

@@ -1,0 +1,2 @@
+echo "Launching..."
+sudo java -Djava.security.policy=./../properties/gpio.policy -classpath .:./../libs/* -Dhome.core.settings=./../properties/config -Djava.library.path=./../properties/ -Djdk.dio.registry=./../properties/dio.properties pzalejko.iot.hardware.home.core.Main

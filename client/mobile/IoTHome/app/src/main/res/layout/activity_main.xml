@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:paddingLeft="16dp"
+              android:paddingRight="16dp"
+              android:orientation="vertical" android:background="@drawable/activity_background">
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/empty_text_marker"
+            android:gravity="center"
+            android:id="@+id/temperatureTextView" android:layout_gravity="top"
+            android:textColor="@android:color/white" android:textSize="60dp" android:textAlignment="center"
+            android:paddingTop="45dp"/>
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/connecting"
+            android:gravity="center"
+            android:id="@+id/connectingTextView" android:layout_marginTop="20dp" android:textColor="@android:color/white"
+            android:textSize="20dp" android:onClick="onClick"/>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            >
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ledImageView" android:layout_gravity="center_horizontal" android:src="@drawable/led_off"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/empty_text_marker"
+                android:id="@+id/tempAlertValueText" android:layout_gravity="center_horizontal"
+                android:textColor="@android:color/white"/>
+    </LinearLayout>
+</LinearLayout>

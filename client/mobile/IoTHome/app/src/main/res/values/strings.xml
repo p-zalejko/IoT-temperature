@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">IoTHome</string>
+    <string name="app_version">(0.0.1)</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_about">About</string>
+    <string name="temperatureFormat">{0}°{1}</string>
+    <string name="dateFormat">yyyy-mm-dd hh:mm:ss</string>
+    <string name="updateOn">Last update on\n</string>
+    <string name="connecting">Connecting...</string>
+    <string name="connected">Connected. Waiting for data...</string>
+    <string name="disconnected">Disconnected.</string>
+    <string name="about_description">IoT application showing a temperature value.</string>
+    <string name="settings_hostTitle">MQTT Server</string>
+    <string name="settings_host_summary">An address to the MQTT broker.</string>
+    <string name="settings_client_title">Client ID</string>
+    <string name="settings_client_summary">A MQTT Clint ID.</string>
+    <string name="settings_temperature_title">Data Topic</string>
+    <string name="settings_temperature_summary">A name of the topic which provides data.</string>
+    <string name="temperature_alert_summary">A temperate when an alert must go off.</string>
+    <string name="temperature_alert_title">Temperature Alert</string>
+    <string name="empty_text_marker">---</string>
+    <string name="action_set_temp_alert">Set Alert</string>
+    <string name="alert_dialog_update_button_text">Update</string>
+    <string name="alert_dialog_cancel_button_text">Cancel</string>
+    <string name="alert_dialog_title_text">Set a new temperature alert:</string>
+    <string name="set_up_network_dialog_message">This application requires a connection to the Network.\n\nWould you like
+        to set up the connection now?\n\n(If not then the application will be turned off.)
+    </string>
+    <string name="set_up_network_dialog_ok_button">Ok</string>
+    <string name="set_up_network_dialog_cancel">Cancel</string>
+    <string name="set_up_network_dialog_title">Network</string>
+    <string name="temperature_view_missing">Temperature view is missing.</string>
+    <string name="connecting_status_view_missing">Connecting Status view is missing.</string>
+    <string name="led_status_view_missing">Led Status view is missing.</string>
+    <string name="temperature_alert_view_missing">Temperature Alert View is missing.</string>
+    <string name="could_not_connect_to_mqtt">Could not connect to a MQTT broker</string>
+</resources>

@@ -1,0 +1,3 @@
+sudo java -Djava.security.policy=./gpio.policy -classpath .:./dio-1.0.0.jar:pzalejko.iot.hardware.led.example-0.0.1-SNAPSHOT.jar -Djava.library.path=. -Djdk.dio.registry=./dio.properties pzalejko.iot.hardware.led.example.Main
+
+mvn install:install-file -DgroupId=openjdk -DartifactId=dio -Dversion=1.0.0 -Dpackaging=jar -Dfile=/home/pi/projects/dio/dev/build/jar/dio.jar -DlocalRepositoryPath=/home/pi/projects/git/maven-repo

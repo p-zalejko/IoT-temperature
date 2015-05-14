@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="./bower_components/bootstrap-css-only/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="./styles/style.css"/>
+    <script type="text/javascript" src="./bower_components/sockjs/sockjs.min.js"></script>
+    <script type="text/javascript" src="./bower_components/stomp-websocket/lib/stomp.min.js"></script>
+    <script type="text/javascript" src="./bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="./bower_components/Chart.js/Chart.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script type="text/javascript">
+        var stompClient = null;
+        var tempAlertValue = null;
+
+        function setConnected(connected) {
+
+        }
+
+        function connect() {
+            var socket = new SockJS('/iot');
+            stompClient = Stomp.over(socket);
+            stompClient.connect({}, function (frame) {
+                setConnected(true);
+                console.log('Connected: ' + frame);
+                stompClient.subscribe('/topic/connectionStatus', function (greeting) {
+                    showGreeting(JSON.parse(greeting.body).content);
+                });
+                stompClient.subscribe('/topic/temperature', function (greeting) {
+                    updateChart(JSON.parse(greeting.body).temperature, JSON.parse(greeting.body).date);
+                });
+                stompClient.subscribe('/topic/temperatureAlert', function (greeting) {
+                    setTemperatureAlert(JSON.parse(greeting.body).temperature);
+                });
+            });
+        }
+
+        function sendName() {
+            var name = document.getElementById('name').value;
+            stompClient.send("/app/iot", {}, JSON.stringify({'name': name}));
+        }
+
+        function disconnect() {
+            if (stompClient != null) {
+                stompClient.disconnect();
+            }
+            setConnected(false);
+            console.log("Disconnected");
+        }
+    </script>
+
+    <script type="text/javascript">
+        var myLineChart = null
+
+        function createCanvas() {
+            var data = {
+                labels: [],
+                datasets: [
+                    {
+                        label: "Temperature",
+                        fillColor: "rgba(151,187,205,0.2)",
+                        strokeColor: "rgba(151,187,205,1)",
+                        pointColor: "rgba(151,187,205,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(151,187,205,1)",
+                        data: []
+                    }
+                ]
+            };
+
+            var ctx = document.getElementById("myChart").getContext("2d");
+            myLineChart = new Chart(ctx).Line(data, {
+                bezierCurve: false
+            });
+        }
+    </script>
+
+
+    <script type="text/javascript">
+        function initIotApp() {
+            document.getElementById('infoBox').style.visibility = 'hidden';
+
+            connect()
+            createCanvas()
+        }
+
+        function updateChart(temp, date) {
+            if (myLineChart.datasets[0].points.length > 20) {
+                myLineChart.removeData();
+            }
+
+            myLineChart.addData([temp], date);
+
+            if (tempAlertValue != null) {
+                for (var i = 0; i < myLineChart.datasets[0].points.length; i++) {
+                    if (myLineChart.datasets[0].points[i].value > tempAlertValue) {
+                        myLineChart.datasets[0].points[i].fillColor = "#FF0000";
+                    } else {
+                        myLineChart.datasets[0].points[i].fillColor = "rgba(151,187,205,0.2)";
+                    }
+                }
+            }
+            myLineChart.update();
+        }
+
+        function showGreeting(message) {
+            document.getElementById('infoBox').style.visibility = 'visible';
+
+            var response = document.getElementById('response');
+            var p = document.createElement('p');
+            p.style.wordWrap = 'break-word';
+            p.appendChild(document.createTextNode(message));
+            response.appendChild(p);
+        }
+
+        function setTemperatureAlert(message) {
+            tempAlertValue = message;
+            var response = document.getElementById('tempAlertValue');
+            response.innerHTML = '';
+            var p = document.createElement('p');
+            p.style.wordWrap = 'break-word';
+            p.appendChild(document.createTextNode('Temperature Alert: ' + message));
+            response.appendChild(p);
+        }
+    </script>
+</head>
+
+<body onload="initIotApp()">
+
+<div class="container">
+    <h2>IoT Temperature Reader:</h2>
+
+    <form role="form">
+        <div class="form-group">
+            <label for="name">Login Name:</label>
+            <input type="text" class="form-control" id="name" placeholder="Client ID">
+        </div>
+        <button type="submit" class="btn btn-primary" onclick="sendName();">Submit</button>
+    </form>
+
+    <div class="alert alert-info" id="infoBox">
+        <h3>
+            <p id="response"></p>
+        </h3>
+    </div>
+
+    <canvas id="myChart" width="1000" height="300"></canvas>
+    <h2><p id="tempAlertValue"></p>
+    </h2>
+</div>
+
+</body>
+</html>
