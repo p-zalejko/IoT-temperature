@@ -1,5 +1,8 @@
 IoT-temperature
 =============
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ffdf4ac295574e49a2ebbb1d92edfc2b)](https://app.codacy.com/app/p-zalejko/IoT-temperature?utm_source=github.com&utm_medium=referral&utm_content=p-zalejko/IoT-temperature&utm_campaign=Badge_Grade_Settings)
+
 A very simple project which collects a temperature value from the DS18B20 sensor and sends it out using a MQTT client.
 
 Video: https://www.youtube.com/watch?v=zlS7tIBRaxU
